@@ -5,8 +5,7 @@ theme = "hugo-html5up-alpha"
 paginate = 2
 
 [params]
-  description = "A light, secure, and easy to use Discord mod"
-  images = ["/img/logo.jpg"]
+  description = "Make your discord snappy and snazzy"
   author = ""
   copyright = "Copyright © GooseNest Team. GooseMod is not affiliated with Discord."
   design = ""
