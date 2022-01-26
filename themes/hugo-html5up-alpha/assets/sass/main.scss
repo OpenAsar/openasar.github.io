@@ -2424,3 +2424,11 @@ $bannerURL: "{{ (.Site.Data.homepage.banner.image | default "images/banner.jpg")
 	height: 2px;
 	background: rgb(128, 128, 128);
 }
+
+#banner {
+	padding: 3em 0 14em 0 !important;
+}
+
+.box {
+	padding: 2em 1em !important;
+}
