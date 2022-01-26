@@ -1,0 +1,101 @@
+### Banner ###
+banner:
+  enable: true
+  image: #default is 'images/banner.jpg'
+  title: "OpenAsar"
+  content: "Make your discord snappy and snazzy"
+  buttons:
+    - title: "Install"
+      icon: "fa-cloud-download-alt"
+      link: "https://github.com/GooseMod/OpenAsar/wiki/Install-Guide"
+      class: "primary"
+    - title: "GitHub"
+      icon: "fa-code-branch"
+      link: "https://github.com/GooseMod/OpenAsar"
+    - title: "Discord"
+      icon: "fa-comments"
+      link: "https://discord.com/invite/neMncS2"
+
+### Highlight ###
+highlight:
+  enable: true
+  header: "What is OpenAsar?"
+  content: "OpenAsar is a rewrite of part of Discord's desktop code, making it snappier and include more features like further customization and theming."
+  image: ""
+
+### Features ###
+features:
+  enable: true
+  rows:
+    - items:
+      - title: "Fast"
+        icon: "fa-tachometer-alt"
+        accent: "accent2" #accent values are 1-8
+        content: "Speeds up Discord's startup time by ~2x (up to ~4x with experimental options)"
+      - title: "Snappy"
+        icon: "fa-bolt"
+        accent: "accent3" #accent values are 1-8
+        content: "Makes your client feel snappier for scrolling, switching channels, and more"
+      - title: "Small"
+        icon: "fa-compress-alt"
+        accent: ""
+        content: "Less than 2% of the size of Discord's original (~9MB > ~122KB)"
+    - items:
+        - title: "Snazzy"
+          icon: "fa-eye"
+          accent: "accent4" #accent values are 1-8
+          content: "Themes your splash screen to match your client's theme automatically"
+        - title: "Customizable"
+          icon: "fa-cog"
+          accent: "accent6" #accent values are 1-8
+          content: "Many config options to choose from, including small tweaks to experimental new options"
+        - title: "Hotpluggable"
+          icon: "fa-plug"
+          accent: "accent5"
+          content: "You can easily swap out OpenAsar with the original by just replacing the file"
+
+stats:
+  rows:
+    - items:
+      - text: "Total Users"
+        stat: ">50000"
+      - text: "Module Developers"
+        stat: "94"
+      - text: "Themes"
+        stat: "115"
+      - text: "Plugins"
+        stat: "77"
+
+
+### Blog ###
+blog:
+  enable: false
+  # Leave header text blank to remove entire <section>
+  header: "News"
+  buttonText: "Read More"
+  postCount: 2
+
+### Call to Action ###
+cta:
+  enable: false
+  header: "Sign up for beta access"
+  content: "Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc."
+
+
+installer:
+  channels:
+    - "Stable"
+    - "PTB"
+    - "Canary"
+    - "Development"
+  
+  mods:
+    major:
+      - "BetterDiscord"
+#      - "SmartCord"
+    
+    minor:
+      - "GooseMod"
+  
+  tools:
+    - "React DevTools"

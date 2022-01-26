@@ -1,0 +1,44 @@
+languageCode = "en-us"
+title = "OpenAsar"
+baseURL = "/"
+theme = "hugo-html5up-alpha"
+paginate = 2
+
+[params]
+  description = "A light, secure, and easy to use Discord mod"
+  images = ["/img/logo.jpg"]
+  author = ""
+  copyright = "Copyright © GooseNest Team. GooseMod is not affiliated with Discord."
+  design = ""
+  mainSections = ["blog"]
+
+
+## Markdown Settings
+enableEmoji = true
+[markup.goldmark]
+  [markup.goldmark.extensions]
+    definitionList = true
+    footnote = true
+    linkify = true
+    strikethrough = true
+    table = true
+    taskList = true
+    typographer = true
+  [markup.goldmark.parser]
+    attribute = true
+    autoHeadingID = true
+    autoHeadingIDType = "github"
+  [markup.goldmark.renderer]
+    hardWraps = false
+    unsafe = true
+    xhtml = false
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "bw"
+    tabWidth = 4
