@@ -2430,5 +2430,38 @@ $bannerURL: "{{ (.Site.Data.homepage.banner.image | default "images/banner.jpg")
 }
 
 .box {
-	padding: 2em 1em !important;
+	padding: 2em 1em;
+	margin: 0 0 2em 0;
+}
+
+.box > .icon {
+	display: none;
+}
+
+.box > h3 {
+	font-size: 2em;
+	font-weight: 500;
+}
+
+.box > p {
+	font-size: 1em;
+	font-weight: 400;
+}
+
+h2 {
+	line-height: 0.5em;
+	font-weight: 500;
+}
+
+.major > p {
+	font-size: 1.3em;
+	font-weight: 400;
+}
+
+.row > * {
+	padding: 0 0 0 2em;
+}
+
+#main {
+	width: 70em;
 }
