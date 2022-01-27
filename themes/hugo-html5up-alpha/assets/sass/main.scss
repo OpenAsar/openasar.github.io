@@ -2448,7 +2448,7 @@ $bannerURL: "{{ (.Site.Data.homepage.banner.image | default "images/banner.jpg")
 }
 
 .box > h3 {
-	font-size: 1.8em;
+	font-size: 2em;
 	line-height: 3rem;
 	font-weight: 600;
 	display: inline;
