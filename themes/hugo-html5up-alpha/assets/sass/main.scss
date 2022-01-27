@@ -581,7 +581,7 @@ $bannerURL: "{{ (.Site.Data.homepage.banner.image | default "images/banner.jpg")
 
 	.box {
 		box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
-		background: #202428;
+		background: #20282D;
 		border-radius: _size(border-radius);
 		margin: 0 0 _size(element-margin) 0;
 		padding: $box-padding;
@@ -2435,17 +2435,29 @@ $bannerURL: "{{ (.Site.Data.homepage.banner.image | default "images/banner.jpg")
 }
 
 .box > .icon {
-	display: none;
+	text-align: center;
+	margin: 0;
+	line-height: 3em;
+	height: 3em;
+	width: 3em;
+	float: right;
+}
+
+.icon.major:before {
+	font-size: 1.8em;
 }
 
 .box > h3 {
-	font-size: 2em;
-	font-weight: 500;
+	font-size: 1.8em;
+	line-height: 3rem;
+	font-weight: 600;
+	display: inline;
 }
 
 .box > p {
+	margin-top: 1em;
 	font-size: 1em;
-	font-weight: 400;
+	font-weight: 500;
 }
 
 h2 {
@@ -2464,4 +2476,9 @@ h2 {
 
 #main {
 	width: 70em;
+}
+
+.col-4 .box {
+	padding: 1.5em;
+	text-align: left;
 }
