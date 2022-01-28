@@ -21,7 +21,13 @@
 <h2>OpenAsar</h2>
 <p>Make your discord snappy and snazzy</p>
 <ul class="actions special">
-<li><a href=https://github.com/GooseMod/OpenAsar/wiki/Install-Guide class="button primary" alt=Install><i class="icon solid fa-cloud-download-alt" style=margin-right:5px></i> Install</a></li>
+<li id=install-parent><a id=install-button href=# class="button primary" alt=Install style=position:relative;padding-right:3.5em><i class="icon solid fa-cloud-download-alt" style=margin-right:5px></i> Install <i class="icon solid fa-chevron-down" style=position:absolute;right:12px></i></a>
+<div>
+<a class=button href=#install>Stable</a>
+<a class=button href=#install>PTB</a>
+<a class=button href=#install>Canary</a>
+</div>
+</li>
 <li><a href=https://github.com/GooseMod/OpenAsar class=button alt=GitHub><i class="icon solid fa-code-branch" style=margin-right:5px></i> GitHub</a></li>
 <li><a href=https://discord.com/invite/neMncS2 class=button alt=Discord><i class="icon solid fa-comments" style=margin-right:5px></i> Discord</a></li>
 </ul>
@@ -87,52 +93,7 @@
 <ul class=copyright>
 <li>Copyright © GooseNest Team. OpenAsar is not affiliated with Discord.</li>
 </ul>
-</footer></div><div id=installer-1>
-<header class=major>
-<h2>Channel</h2>
-</header>
-<ul class="actions special">
-<li><a href=# class=button>Stable</a></li>
-<li><a href=# class=button>PTB</a></li>
-<li><a href=# class=button>Canary</a></li>
-<li><a href=# class=button>Development</a></li>
-</ul>
-</div>
-<div id=installer-2>
-<header class=major>
-<h2>Install Method</h2>
-</header>
-<ul class="actions special">
-<li><a href=# class="button primary">Simple</a></li>
-<li><a href=# class=button>Advanced</a></li>
-</ul>
-</div>
-<div id=installer-3>
-<header class=major>
-<h2>Mods</h2>
-</header>
-<ul style=margin-bottom:6em class="actions special selectable-one">
-<li><a href=# class="button selectable">BetterDiscord</a></li>
-</ul>
-<ul class="actions special">
-<li><a href=# class="button selectable">GooseMod</a></li>
-</ul>
-<ul class="actions special final">
-<li><a href=# class="button primary"><i class="icon solid fa-arrow-right" style=margin-right:5px></i> Continue</a></li>
-</ul>
-</div>
-<div id=installer-4>
-<header class=major>
-<h2>Tools</h2>
-</header>
-<ul class="actions special">
-<li><a href=# class="button selectable">React DevTools</a></li>
-</ul>
-<ul class="actions special final">
-<li><a href=# class="button primary"><i class="icon solid fa-arrow-right" style=margin-right:5px></i> Continue</a></li>
-</ul>
-</div>
-<div id=installer-batch>
+</footer></div><div id=installer-batch>
 <header class=major>
 <h2>Run Script</h2>
 </header>
@@ -149,12 +110,12 @@ If you have any problems you can join our Discord server.
 <li><a href=# class="button primary"><i class="icon solid fa-times" style=margin-right:5px></i> Close</a></li>
 </ul>
 </div>
-<div id=installer-5>
+<div id=installer-file>
 <header class=major>
 <h2>File Handling</h2>
 </header>
 <p>
-When clicking continue, you will be asked to open a file. Please use the path below. After, save the new downloaded file over the file you opened.
+When clicking continue, a file will be downloaded. Please overwrite (save over) the file which you can find in the path below:
 </p>
 <ul class="actions special">
 <li id=path-for>path here</li>
@@ -163,7 +124,7 @@ When clicking continue, you will be asked to open a file. Please use the path be
 <li><a href=# class="button primary"><i class="icon solid fa-arrow-right" style=margin-right:5px></i> Continue</a></li>
 </ul>
 </div>
-<div id=installer-6>
+<div id=installer-restart>
 <header class=major>
 <h2>Restart</h2>
 </header>
@@ -175,31 +136,29 @@ Restart Discord fully by quitting it via the system tray (Discord icon likely in
 </ul>
 </div>
 <input type=file id=fileSelect style=display:none>
-<script defer>let batch=!1;for(const a of[...document.getElementsByClassName('selectable')]){const b=a.parentElement.parentElement,c=b.classList.contains('selectable-one');a.onclick=()=>{a.classList.contains('selected')?a.classList.remove('selected'):(c&&[...b.children].forEach(a=>a.children[0].classList.remove('selected')),a.classList.add('selected'))}}let channel,channelSuffix='',branches=[],finalResult='';const installer1=document.getElementById('installer-1'),installer2=document.getElementById('installer-2'),installer3=document.getElementById('installer-3'),installer4=document.getElementById('installer-4'),installer5=document.getElementById('installer-5'),installer6=document.getElementById('installer-6'),installerBatch=document.getElementById('installer-batch'),installerPath=document.getElementById('path-for'),fileSelectEl=document.getElementById('fileSelect');for(const a of installer1.querySelectorAll('a'))a.onclick=()=>{switch(installer1.style.display='none',branches=['goosemod'],channel=a.textContent.toLowerCase(),channelSuffix=channel!=='stable'?channel.toLowerCase():'',navigator.platform.substring(0,3).toLowerCase()){case'lin':{installerPath.textContent=`~/.config/discord${channelSuffix}/settings.json`;break}case'win':{installerPath.textContent=`%appdata%\\discord${channelSuffix}\\settings.json`,batch=!0;break}case'mac':{installerPath.textContent=`~/Library/Application Support/discord${channelSuffix}/settings.json`;break}}finalStep()};const finalStep=()=>{batch?(batch=`@echo off
-set path=${installerPath.textContent}
-echo "Installing GooseMod, should just take a second..."
+<script defer>let channel,channelSuffix,pathTemplate='',useBatch=!1;const plat=navigator.platform.substring(0,3).toLowerCase(),installerBatch=document.getElementById('installer-batch'),installerFile=document.getElementById('installer-file'),installerRestart=document.getElementById('installer-restart'),installerPath=document.getElementById('path-for'),fileSelectEl=document.getElementById('fileSelect');installerFile.querySelector('.final a').onclick=()=>{downloadFileUrl('https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar','app.asar'),installerFile.style.display='none',installerRestart.style.display='block'};const getFileUpload=async()=>{fileSelectEl.value=null,fileSelectEl.click(),await new Promise(a=>{fileSelectEl.onchange=()=>{a()}}),fileSelectEl.onchange=void 0;const a=fileSelectEl.files[0];return a===void 0?void 0:a},downloadToFile=(b,c,d)=>{const a=document.createElement('a'),e=new Blob([b],{type:d});a.href=URL.createObjectURL(e),a.download=c,a.click(),URL.revokeObjectURL(a.href)},downloadFileUrl=(b,c)=>{const a=document.createElement('a');a.href=b,a.download=c,a.click()};document.body.onclick=a=>{a.path.some(a=>a.id?.startsWith('install'))||[...document.querySelectorAll(`[id^="installer"]`)].forEach(a=>a.style.display='none')},installerBatch.querySelector('.final a').onclick=()=>{installerBatch.style.display='none'},installerRestart.querySelector('.final a').onclick=()=>{installerRestart.style.display='none'};const downloadBatch=()=>{batch=`@echo off
+setlocal enabledelayedexpansion
 
 C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
 C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
 C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
 
-C:\\Windows\\System32\\TIMEOUT.exe /t 3 /nobreak
+C:\\Windows\\System32\\TIMEOUT.exe /t 5 /nobreak
 
-copy "%path%" temp1.json
-(
-  for /F "tokens=*" %%A in (temp1.json) do (
-    echo %%A
-    if "%%A" equ "{" (
-      echo "UPDATE_ENDPOINT": "https://updates.goosemod.com/${branches.join('+')}",
-      echo "NEW_UPDATE_ENDPOINT": "https://updates.goosemod.com/${branches.join('+')}/",
-    )
+powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile temp.asar"
+
+set b=%localappdata%\\Discord${channelSuffix}
+for /f "delims=" %%a in ('dir "%b%" /on /ad /b') do (
+  set d=%%a
+  echo "!d:~0,6!"
+  if "!d:~0,4!"=="app-" (
+    copy /y temp.asar "%b%\\!d!\\resources\\app.asar"
   )
-) >temp2.json
-move /y temp2.json "%path%"
-del temp1.json
+)
+del temp.asar
 
 start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Discord${channelSuffix}.exe
 
-goto 2>nul & del "%~f0"`,downloadToFile(batch,'goosemod.bat','application/bat'),installerBatch.style.display='block'):installer5.style.display='block'};for(const a of installer2.querySelectorAll('a'))a.onclick=a.textContent==='Simple'?()=>{branches=['goosemod'],installer2.style.display='none',finalStep()}:()=>{installer2.style.display='none',installer3.style.display='block'};installer3.querySelector('.final a').onclick=()=>{installer3.style.display='none',installer4.style.display='block'},installer4.querySelector('.final a').onclick=()=>{branches=[...installer3.querySelectorAll('a')].filter(a=>a.classList.contains('selected')).map(a=>a.textContent.toLowerCase().replace(' ','')).concat([...installer4.querySelectorAll('a')].filter(a=>a.classList.contains('selected')).map(a=>a.textContent.toLowerCase().replace(' ',''))),installer4.style.display='none',finalStep()};const getFileUpload=async()=>{fileSelectEl.value=null,fileSelectEl.click(),await new Promise(a=>{fileSelectEl.onchange=()=>{a()}}),fileSelectEl.onchange=void 0;const a=fileSelectEl.files[0];return a===void 0?void 0:a},downloadToFile=(b,c,d)=>{const a=document.createElement('a'),e=new Blob([b],{type:d});a.href=URL.createObjectURL(e),a.download=c,a.click(),URL.revokeObjectURL(a.href)};installer5.querySelector('.final a').onclick=async()=>{const c=await getFileUpload(),b=new FileReader;b.readAsText(c,"UTF-8");const d=await new Promise(a=>{b.onload=b=>{a(b.target.result)}});let a=JSON.parse(d);a.UPDATE_ENDPOINT=`https:\/\/updates.goosemod.com/${branches.join('+')}`,a.NEW_UPDATE_ENDPOINT=`https:\/\/updates.goosemod.com/${branches.join('+')}/`,console.log(a),finalResult=JSON.stringify(a,null,2),downloadToFile(finalResult,'settings.json','text/plain'),installer5.style.display='none',installer6.style.display='block'},document.body.onclick=a=>{!a.path.some(a=>a.id?.startsWith('installer-'))&&a.target.textContent!=='Desktop'&&[...document.querySelectorAll(`[id^="installer"]`)].forEach(a=>a.style.display='none')},installerBatch.querySelector('.final a').onclick=()=>{installerBatch.style.display='none'},installer6.querySelector('.final a').onclick=()=>{installer6.style.display='none'},document.querySelector('#install-button ~ div a:first-child').onclick=()=>{installer1.style.display='block'},location.href.includes('#install')&&(installer1.style.display='block')</script>
+goto 2>nul & del "%~f0"`,downloadToFile(batch,`openasar_installer_${channel}.bat`,'application/bat')};for(const a of document.querySelectorAll('#install-button ~ div a'))a.onclick=()=>{if(channel=a.textContent.toLowerCase(),channelSuffix=channel!=='stable'?a.textContent:'',plat==='win')installerBatch.style.display='block',downloadBatch();else{switch(plat){case'lin':{const a=document.querySelector('#installer-file ul:not(.final)');a.innerHTML='';for(const c of[`/opt/discord${channel!=='stable'?'-'+channel:''}/resources/app.asar`]){const b=document.createElement('li');b.textContent=c,a.appendChild(b)}document.querySelector('#installer-file p').textContent=document.querySelector('#installer-file p').textContent.replace('Please overwrite (save over) the file which you can find in the path below:','Please find which one of the paths below exist as Linux has various paths. Once you find the path, please overwrite (save over) the file:');break}case'mac':{installerPath.textContent=`/Applications/Discord${a.textContent}.app/Contents/Resources/app.asar`;break}}installerFile.style.display='block'}}</script>
 </body>
 </html>
