@@ -5,10 +5,6 @@ banner:
   title: "OpenAsar"
   content: "Make your discord snappy and snazzy"
   buttons:
-    - title: "Install"
-      icon: "fa-cloud-download-alt"
-      link: "https://github.com/GooseMod/OpenAsar/wiki/Install-Guide"
-      class: "primary"
     - title: "GitHub"
       icon: "fa-code-branch"
       link: "https://github.com/GooseMod/OpenAsar"

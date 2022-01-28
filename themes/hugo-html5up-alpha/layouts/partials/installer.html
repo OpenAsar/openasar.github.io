@@ -1,64 +1,3 @@
-<div id="installer-1">
-  <header class="major">
-    <h2>Channel</h2>
-  </header>
-
-  <ul class="actions special">
-  {{ range .channels }}
-    <li><a href="#" class="button">{{ . }}</a></li>
-  {{ end }}
-  </ul>
-</div>
-
-<div id="installer-2">
-  <header class="major">
-    <h2>Install Method</h2>
-  </header>
-
-  <ul class="actions special">
-    <li><a href="#" class="button primary">Simple</a></li>
-    <li><a href="#" class="button">Advanced</a></li>
-  </ul>
-</div>
-
-<div id="installer-3">
-  <header class="major">
-    <h2>Mods</h2>
-  </header>
-
-  <ul style="margin-bottom: 6em" class="actions special selectable-one">
-  {{ range .mods.major }}
-    <li><a href="#" class="button selectable">{{ . }}</a></li>
-  {{ end }}
-  </ul>
-
-  <ul class="actions special">
-    {{ range .mods.minor }}
-      <li><a href="#" class="button selectable">{{ . }}</a></li>
-    {{ end }}
-  </ul>
-
-  <ul class="actions special final">
-    <li><a href="#" class="button primary"><i class="icon solid fa-arrow-right" style="margin-right: 5px;"></i> Continue</a></li>
-  </ul>
-</div>
-
-<div id="installer-4">
-  <header class="major">
-    <h2>Tools</h2>
-  </header>
-
-  <ul class="actions special">
-  {{ range .tools }}
-    <li><a href="#" class="button selectable">{{ . }}</a></li>
-  {{ end }}
-  </ul>
-
-  <ul class="actions special final">
-    <li><a href="#" class="button primary"><i class="icon solid fa-arrow-right" style="margin-right: 5px;"></i> Continue</a></li>
-  </ul>
-</div>
-
 <div id="installer-batch">
   <header class="major">
     <h2>Run Script</h2>
@@ -81,13 +20,13 @@
   </ul>
 </div>
 
-<div id="installer-5">
+<div id="installer-file">
   <header class="major">
     <h2>File Handling</h2>
   </header>
 
   <p>
-    When clicking continue, you will be asked to open a file. Please use the path below. After, save the new downloaded file over the file you opened.
+    When clicking continue, a file will be downloaded. Please overwrite (save over) the file which you can find in the path below:
   </p>
 
   <ul class="actions special">
@@ -99,7 +38,7 @@
   </ul>
 </div>
 
-<div id="installer-6">
+<div id="installer-restart">
   <header class="major">
     <h2>Restart</h2>
   </header>
@@ -117,143 +56,24 @@
 
 
 <script defer>
-  let batch = false;
+  let channel, channelSuffix;
+  let pathTemplate = '', useBatch = false;
+  const plat = navigator.platform.substring(0, 3).toLowerCase();
 
-  for (const el of [...document.getElementsByClassName('selectable')]) {
-    const container = el.parentElement.parentElement;
-    const inOneContainer = container.classList.contains('selectable-one');
-    
-    el.onclick = () => {
-      if (el.classList.contains('selected')) {
-        el.classList.remove('selected');
-      } else {
-        if (inOneContainer) {
-          [...container.children].forEach((x) => x.children[0].classList.remove('selected'));
-        }
-        
-        el.classList.add('selected');
-      }
-    };
-  }
-  
-  let channel, channelSuffix = '';
-  let branches = [];
-  let finalResult = '';
-  
-  const installer1 = document.getElementById('installer-1');
-  const installer2 = document.getElementById('installer-2');
-  const installer3 = document.getElementById('installer-3');
-  const installer4 = document.getElementById('installer-4');
-  const installer5 = document.getElementById('installer-5');
-  const installer6 = document.getElementById('installer-6');
   const installerBatch = document.getElementById('installer-batch');
+  const installerFile = document.getElementById('installer-file');
+  const installerRestart = document.getElementById('installer-restart');
   
   const installerPath = document.getElementById('path-for');
 
   const fileSelectEl = document.getElementById('fileSelect');
+
   
-  for (const el of installer1.querySelectorAll('a')) {
-    el.onclick = () => {
-      installer1.style.display = 'none';
-      //installer2.style.display = 'block';
+  installerFile.querySelector('.final a').onclick = () => {
+    downloadFileUrl('https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar', 'app.asar');
 
-      branches = ['goosemod']; // Skip simple / advanced, always simple
-      
-      channel = el.textContent.toLowerCase();
-      
-      channelSuffix = channel !== 'stable' ? channel.toLowerCase() : '';
-      switch (navigator.platform.substring(0, 3).toLowerCase()) {
-        case 'lin': {
-          installerPath.textContent = `~/.config/discord${channelSuffix}/settings.json`;
-          
-          break;
-        }
-        
-        case 'win': {
-          installerPath.textContent = `%appdata%\\discord${channelSuffix}\\settings.json`;
-          batch = true;
-          
-          break;
-        }
-        
-        case 'mac': {
-          installerPath.textContent = `~/Library/Application Support/discord${channelSuffix}/settings.json`;
-          
-          break;
-        }
-      }
-
-      finalStep(); // Skip simple / advanced, always simple
-    };
-  }
-
-  const finalStep = () => {
-    if (batch) {
-      batch = `@echo off
-set path=${installerPath.textContent}
-echo "Installing GooseMod, should just take a second..."
-
-C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
-C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
-C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
-
-C:\\Windows\\System32\\TIMEOUT.exe /t 3 /nobreak
-
-copy "%path%" temp1.json
-(
-  for /F "tokens=*" %%A in (temp1.json) do (
-    echo %%A
-    if "%%A" equ "{" (
-      echo "UPDATE_ENDPOINT": "https://updates.goosemod.com/${branches.join('+')}",
-      echo "NEW_UPDATE_ENDPOINT": "https://updates.goosemod.com/${branches.join('+')}/",
-    )
-  )
-) >temp2.json
-move /y temp2.json "%path%"
-del temp1.json
-
-start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Discord${channelSuffix}.exe
-
-goto 2>nul & del "%~f0"`;
-
-      downloadToFile(batch, 'goosemod.bat', 'application/bat');
-
-      installerBatch.style.display = 'block';
-    } else {
-      installer5.style.display = 'block';
-    }
-  };
-
-  for (const el of installer2.querySelectorAll('a')) {
-    el.onclick = el.textContent === 'Simple' ? () => {
-      branches = ['goosemod'];
-
-      installer2.style.display = 'none';
-
-      finalStep();
-    } : () => {
-      installer2.style.display = 'none';
-      installer3.style.display = 'block';
-    };
-  }
-  
-  installer3.querySelector('.final a').onclick = () => {
-    // branches.push(...[...installer2.querySelectorAll('a')].filter((x) => x.classList.contains('selected')).map((x) => x.textContent.toLowerCase().replace(' ', '')));
-    
-    installer3.style.display = 'none';
-    installer4.style.display = 'block';
-  };
-  
-  installer4.querySelector('.final a').onclick = () => {
-    // branches.push(...[...installer3.querySelectorAll('a')].filter((x) => x.classList.contains('selected')).map((x) => x.textContent.toLowerCase().replace(' ', '')));
-    
-    branches = [...installer3.querySelectorAll('a')].filter((x) => x.classList.contains('selected')).map((x) => x.textContent.toLowerCase().replace(' ', '')).concat(
-      [...installer4.querySelectorAll('a')].filter((x) => x.classList.contains('selected')).map((x) => x.textContent.toLowerCase().replace(' ', ''))
-    );
-
-    installer4.style.display = 'none';
-
-    finalStep();
+    installerFile.style.display = 'none';
+    installerRestart.style.display = 'block';
   };
   
   const getFileUpload = async () => {
@@ -287,8 +107,16 @@ goto 2>nul & del "%~f0"`;
     
     URL.revokeObjectURL(a.href);
   };
+
+  const downloadFileUrl = (url, filename) => {
+    const a = document.createElement('a');
+    
+    a.href = url;
+    a.download = filename;
+    a.click();
+  };
   
-  installer5.querySelector('.final a').onclick = async () => {
+  /*installer5.querySelector('.final a').onclick = async () => {
     const file = await getFileUpload();
     
     const reader = new FileReader();
@@ -314,10 +142,10 @@ goto 2>nul & del "%~f0"`;
 
     installer5.style.display = 'none';
     installer6.style.display = 'block';
-  };
+  }; */
 
   document.body.onclick = (e) => {
-    if (!e.path.some((x) => x.id?.startsWith('installer-')) && e.target.textContent !== 'Desktop') {
+    if (!e.path.some((x) => x.id?.startsWith('install'))) {
       [...document.querySelectorAll(`[id^="installer"]`)].forEach((x) => x.style.display = 'none');
     }
   };
@@ -326,15 +154,74 @@ goto 2>nul & del "%~f0"`;
     installerBatch.style.display = 'none';
   };
 
-  installer6.querySelector('.final a').onclick = () => {
-    installer6.style.display = 'none';
+  installerRestart.querySelector('.final a').onclick = () => {
+    installerRestart.style.display = 'none';
   };
 
-  document.querySelector('#install-button ~ div a:first-child').onclick = () => {
-    installer1.style.display = 'block';
+  const downloadBatch = () => {
+    batch = `@echo off
+setlocal enabledelayedexpansion
+
+C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
+C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
+C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
+
+C:\\Windows\\System32\\TIMEOUT.exe /t 5 /nobreak
+
+powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile temp.asar"
+
+set b=%localappdata%\\Discord${channelSuffix}
+for /f "delims=" %%a in ('dir "%b%" /on /ad /b') do (
+  set d=%%a
+  echo "!d:~0,6!"
+  if "!d:~0,4!"=="app-" (
+    copy /y temp.asar "%b%\\!d!\\resources\\app.asar"
+  )
+)
+del temp.asar
+
+start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Discord${channelSuffix}.exe
+
+goto 2>nul & del "%~f0"`;
+
+    downloadToFile(batch, `openasar_installer_${channel}.bat`, 'application/bat');
   };
 
-  if (location.href.includes('#install')) {
-    installer1.style.display = 'block';
+  for (const el of document.querySelectorAll('#install-button ~ div a')) {
+    el.onclick = () => {
+      channel = el.textContent.toLowerCase();
+      channelSuffix = channel !== 'stable' ? el.textContent : '';
+      
+      if (plat === 'win') {
+        installerBatch.style.display = 'block';
+        downloadBatch();
+      } else {
+        switch (plat) {
+          case 'lin': {
+            const parentEl = document.querySelector('#installer-file ul:not(.final)');
+            parentEl.innerHTML = '';
+
+            for (const p of [ `/opt/discord${channel !== 'stable' ? ('-' + channel) : ''}/resources/app.asar` ]) {
+              const el = document.createElement('li');
+              el.textContent = p;
+
+              parentEl.appendChild(el);
+            }
+
+            document.querySelector('#installer-file p').textContent = document.querySelector('#installer-file p').textContent.replace('Please overwrite (save over) the file which you can find in the path below:', 'Please find which one of the paths below exist as Linux has various paths. Once you find the path, please overwrite (save over) the file:');
+
+            // installerPath.textContent = `/opt/discord${channel !== 'stable' ? ('-' + channel) : ''}/resources/app.asar`;
+            break;
+          }
+
+          case 'mac': {
+            installerPath.textContent = `/Applications/Discord${el.textContent}.app/Contents/Resources/app.asar`;
+            break;
+          }
+        }
+
+        installerFile.style.display = 'block';
+      }
+    };
   }
 </script>
