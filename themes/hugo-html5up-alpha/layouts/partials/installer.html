@@ -201,7 +201,8 @@ goto 2>nul & del "%~f0"`;
             const parentEl = document.querySelector('#installer-file ul:not(.final)');
             parentEl.innerHTML = '';
 
-            for (const p of [ `/opt/discord${channel !== 'stable' ? ('-' + channel) : ''}/resources/app.asar` ]) {
+            const linuxSuffix = channel !== 'stable' ? ('-' + channel) : '';
+            for (const p of [ `/opt/discord${linuxSuffix}/resources/app.asar`, `/usr/lib/discord${linuxSuffix}/resources/app.asar` ]) {
               const el = document.createElement('li');
               el.textContent = p;
 
