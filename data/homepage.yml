@@ -22,33 +22,31 @@ highlight:
 ### Features ###
 features:
   enable: true
-  rows:
-    - items:
-      - title: "Fast"
-        icon: "fa-tachometer-alt"
-        accent: "accent2" #accent values are 1-8
-        content: "Speeds up Discord's startup time by ~2x (up to ~4x with experimental options)"
-      - title: "Snappy"
-        icon: "fa-bolt"
-        accent: "accent3" #accent values are 1-8
-        content: "Makes your client feel snappier for scrolling, switching channels, and more"
-      - title: "Small"
-        icon: "fa-compress-alt"
-        accent: ""
-        content: "Less than 2% of the size of Discord's original (~9MB > ~100KB)"
-    - items:
-        - title: "Snazzy"
-          icon: "fa-eye"
-          accent: "accent4" #accent values are 1-8
-          content: "Themes your splash screen to match your client's theme automatically"
-        - title: "Customizable"
-          icon: "fa-cog"
-          accent: "accent6" #accent values are 1-8
-          content: "Many config options to choose from, with small tweaks to experimental options"
-        - title: "Drop-in"
-          icon: "fa-plug"
-          accent: "accent5"
-          content: "You can easily swap out OpenAsar with the original by just replacing the file"
+  items:
+    - title: "Fast"
+      icon: "fa-tachometer-alt"
+      items: "accent2" #accent values are 1-8
+      content: "Speeds up Discord's startup time by ~2x (up to ~4x with experimental options)"
+    - title: "Snappy"
+      icon: "fa-bolt"
+      accent: "accent3" #accent values are 1-8
+      content: "Makes your client feel snappier for scrolling, switching channels, and more"
+    - title: "Small"
+      icon: "fa-compress-alt"
+      accent: ""
+      content: "Less than 2% of the size of Discord's original (~9MB > ~100KB)"
+    - title: "Snazzy"
+      icon: "fa-eye"
+      accent: "accent4" #accent values are 1-8
+      content: "Themes your splash screen to match your client's theme automatically"
+    - title: "Customizable"
+      icon: "fa-cog"
+      accent: "accent6" #accent values are 1-8
+      content: "Many config options to choose from, with small tweaks to experimental options"
+    - title: "Drop-in"
+      icon: "fa-plug"
+      accent: "accent5"
+      content: "You can easily swap out OpenAsar with the original by just replacing the file"
 
 stats:
   rows:

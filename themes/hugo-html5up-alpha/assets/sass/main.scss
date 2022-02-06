@@ -7,6 +7,24 @@
 @import url('css/fontawesome-all.min.css');
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic");
 
+// card grid
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(var(--column-count), 1fr);
+	column-gap: 1.5rem;
+
+	--column-count: 3;
+
+	@media (max-width: 900px) {
+		--column-count: 2;
+	}
+
+	@media (max-width: 600px) {
+		--column-count: 1;
+	}
+}
+// card grid over
+
 /*
 	Alpha by HTML5 UP
 	html5up.net | @ajlkn
