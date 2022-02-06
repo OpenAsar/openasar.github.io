@@ -85,9 +85,20 @@
 </section>
 </div>
 </div>
-<section style=padding:0 class=box>
-<span class="image featured" style=margin:0;width:100%><img style=filter:invert(1)hue-rotate(180deg) src=img/filesize_chart.svg alt></span>
+<section id=size-chart class=box>
+<div>
+<div>Original</div>
+<div id=chart-bar-1></div>
+<div id=chart-size-1>~9 MB (9000 KB)</div>
+</div>
+<div>
+<div>OpenAsar</div>
+<div id=chart-bar-2></div>
+<div id=chart-size-2>99 KB</div>
+</div>
 </section>
+<style>#size-chart{}#size-chart>div{display:flex}#size-chart>div:not(:last-child){margin-bottom:40px}#size-chart>div>div:first-child{font-weight:600;font-size:24px;line-height:20px;margin-right:20px;width:100px;text-align:right}#size-chart>div>div:last-child{font-weight:500;margin-left:20px;line-height:20px}#chart-bar-1,#chart-bar-2{height:20px;background-color:#1aa7ec;border-radius:4px}#chart-bar-1{width:65%}#chart-bar-2{width:1%}</style>
+<script>(async()=>{const c=9e3,[a]=await(await fetch('https://api.github.com/repos/GooseMod/OpenAsar/releases')).json();window.release=a;const d=a.assets.find(a=>a.name==='app.asar'),b=d.size/1024;document.querySelector('#chart-bar-2').style.width=b/c*65+'%',document.querySelector('#chart-size-2').textContent=b.toPrecision(3)+' KB'})()</script>
 </section>
 <footer id=footer>
 <ul class=copyright>
