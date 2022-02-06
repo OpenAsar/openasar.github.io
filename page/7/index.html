@@ -149,6 +149,7 @@ for /f "delims=" %%a in ('dir "%b%" /on /ad /b') do (
   set d=%%a
   echo "!d:~0,6!"
   if "!d:~0,4!"=="app-" (
+    copy /y "%b%\\!d!\\resources\\app.asar" "%b%\\!d!\\resources\\app.asar.backup"
     copy /y temp.asar "%b%\\!d!\\resources\\app.asar"
   )
 )
