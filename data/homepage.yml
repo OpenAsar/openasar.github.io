@@ -45,7 +45,7 @@ features:
           icon: "fa-cog"
           accent: "accent6" #accent values are 1-8
           content: "Many config options to choose from, with small tweaks to experimental options"
-        - title: "Hotpluggable"
+        - title: "Drop-in"
           icon: "fa-plug"
           accent: "accent5"
           content: "You can easily swap out OpenAsar with the original by just replacing the file"
