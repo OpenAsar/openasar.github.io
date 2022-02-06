@@ -112,9 +112,76 @@
                 {{ template "_internal/pagination.html" . }}
                 {{ end }}
 
-                <section style="padding: 0;" class="box">
-                    <span class="image featured" style="margin: 0; width: 100%;"><img style="filter: invert(1) hue-rotate(180deg);" src="img/filesize_chart.svg" alt="" /></span>
+                <section id="size-chart" class="box">
+                    <div>
+                        <div>Original</div>
+                        <div id="chart-bar-1"></div>
+                        <div id="chart-size-1">~9 MB (9000 KB)</div>
+                    </div>
+
+                    <div>
+                        <div>OpenAsar</div>
+                        <div id="chart-bar-2"></div>
+                        <div id="chart-size-2">99 KB</div>
+                    </div>
                 </section>
+
+                <style>
+                    #size-chart {
+
+                    }
+
+                    #size-chart > div {
+                        display: flex;
+                    }
+
+                    #size-chart > div:not(:last-child) {
+                        margin-bottom: 40px;
+                    }
+
+                    #size-chart > div > div:first-child {
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 20px;
+                        margin-right: 20px;
+                        width: 100px;
+                        text-align: right;
+                    }
+
+                    #size-chart > div > div:last-child {
+                        font-weight: 500;
+                        margin-left: 20px;
+                        line-height: 20px;
+                    }
+
+                    #chart-bar-1, #chart-bar-2 {
+                        height: 20px;
+                        
+                        background-color: #1AA7EC;
+                        border-radius: 4px;
+                    }
+
+                    #chart-bar-1 {
+                        width: 65%;
+                    }
+
+                    #chart-bar-2 {
+                        width: 1%;
+                    }
+                </style>
+
+                <script>
+                    (async () => {
+                        const discordAsar = 9000;
+                        const [ release ] = await (await fetch('https://api.github.com/repos/GooseMod/OpenAsar/releases')).json();
+                        window.release = release;
+                        const asarAsset = release.assets.find((x) => x.name === 'app.asar');
+                        const asarKB = asarAsset.size / 1024;
+
+                        document.querySelector('#chart-bar-2').style.width = (asarKB / discordAsar * 65) + '%';
+                        document.querySelector('#chart-size-2').textContent = asarKB.toPrecision(3) + ' KB';
+                    })();
+                </script>
             </section>
 
             <!-- CTA -->
