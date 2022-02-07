@@ -108,7 +108,9 @@
                 {{ template "_internal/pagination.html" . }}
                 {{ end }}
 
-                <section id="size-chart" class="box">
+                <section id="size-chart" class="chart box">
+                    <div>Filesize</div>
+
                     <div>
                         <div>Original</div>
                         <div id="chart-bar-1"></div>
@@ -118,7 +120,23 @@
                     <div>
                         <div>OpenAsar</div>
                         <div id="chart-bar-2"></div>
-                        <div id="chart-size-2">99 KB</div>
+                        <div id="chart-size-2">85 KB</div>
+                    </div>
+                </section>
+
+                <section id="dep-chart" class="chart box">
+                    <div>External (NPM) Dependencies</div>
+
+                    <div>
+                        <div>Original</div>
+                        <div id="chart-bar-3"></div>
+                        <div id="chart-size-3">79</div>
+                    </div>
+
+                    <div>
+                        <div>OpenAsar</div>
+                        <div id="chart-bar-4"></div>
+                        <div id="chart-size-4">0</div>
                     </div>
                 </section>
 
@@ -127,15 +145,24 @@
 
                     }
 
-                    #size-chart > div {
+                    .chart > div {
                         display: flex;
                     }
 
-                    #size-chart > div:not(:last-child) {
+                    .chart > div:not(:last-child) {
                         margin-bottom: 40px;
                     }
 
-                    #size-chart > div > div:first-child {
+                    .chart > div:first-child {
+                        font-weight: 700;
+                        font-size: 24px;
+                        line-height: 24px;
+                        margin-bottom: 40px;
+                        padding: 0;
+                        width: 100%;
+                    }
+
+                    .chart > div > div:first-child {
                         font-weight: 600;
                         font-size: 24px;
                         line-height: 20px;
@@ -144,25 +171,30 @@
                         text-align: right;
                     }
 
-                    #size-chart > div > div:last-child {
-                        font-weight: 500;
+                    .chart > div > div:last-child {
+                        font-weight: 400;
                         margin-left: 20px;
                         line-height: 20px;
+                        font-size: 20px;
                     }
 
-                    #chart-bar-1, #chart-bar-2 {
+                    [id^="chart-bar"] {
                         height: 20px;
                         
                         background-color: #1AA7EC;
                         border-radius: 4px;
                     }
 
-                    #chart-bar-1 {
+                    #chart-bar-1, #chart-bar-3 {
                         width: 65%;
                     }
 
                     #chart-bar-2 {
-                        width: 1%;
+                        width: 0.7%;
+                    }
+
+                    #chart-bar-4 {
+                        width: 0%;
                     }
                 </style>
 
