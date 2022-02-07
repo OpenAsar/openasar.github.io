@@ -3,7 +3,7 @@ banner:
   enable: true
   image: #default is 'images/banner.jpg'
   title: "OpenAsar"
-  content: "Make your discord snappy and snazzy"
+  content: "Starts faster, performs better, even smaller"
   buttons:
     - title: "GitHub"
       icon: "fa-code-branch"

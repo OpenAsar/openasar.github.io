@@ -5,7 +5,7 @@ theme = "hugo-html5up-alpha"
 paginate = 2
 
 [params]
-  description = "Make your discord snappy and snazzy"
+  description = "Starts faster, performs better, even smaller"
   author = ""
   copyright = "Copyright © GooseNest Team. GooseMod is not affiliated with Discord."
   design = ""
