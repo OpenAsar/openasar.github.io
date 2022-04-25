@@ -108,43 +108,73 @@
                 {{ template "_internal/pagination.html" . }}
                 {{ end }}
 
-                <section id="size-chart" class="chart box">
-                    <div>Filesize</div>
-
-                    <div>
-                        <div>Original</div>
-                        <div id="chart-bar-1"></div>
-                        <div id="chart-size-1">~8950 KB</div>
+                <section class="box" id="stats-container">
+                    <div id="size-chart" class="chart">
+                        <div>Filesize</div>
+    
+                        <div>
+                            <div>Original</div>
+                            <div id="chart-bar-1"></div>
+                            <div id="chart-size-1">8944 KB</div>
+                        </div>
+    
+                        <div>
+                            <div>OpenAsar</div>
+                            <div id="chart-bar-2"></div>
+                            <div id="chart-size-2">~50 KB</div>
+                        </div>
                     </div>
+    
+                    <section id="dep-chart" class="chart">
+                        <div>Total External (NPM) Dependencies</div>
+    
+                        <div>
+                            <div>Original</div>
+                            <div id="chart-bar-3"></div>
+                            <div id="chart-size-3">79</div>
+                        </div>
+    
+                        <div>
+                            <div>OpenAsar</div>
+                            <div id="chart-bar-4"></div>
+                            <div id="chart-size-4">0</div>
+                        </div>
+                    </section>
+    
+                    <section id="update-chart" class="chart">
+                        <div>Time Spent Updating on a Low-end Linux PC</div>
+    
+                        <div>
+                            <div>Original</div>
+                            <div id="chart-bar-5"></div>
+                            <div id="chart-size-5">55s</div>
+                        </div>
+    
+                        <div>
+                            <div>OpenAsar</div>
+                            <div id="chart-bar-6"></div>
+                            <div id="chart-size-6">13s</div>
+                        </div>
+                    </section>
 
-                    <div>
-                        <div>OpenAsar</div>
-                        <div id="chart-bar-2"></div>
-                        <div id="chart-size-2">~50 KB</div>
-                    </div>
-                </section>
-
-                <section id="dep-chart" class="chart box">
-                    <div>Total External (NPM) Dependencies</div>
-
-                    <div>
-                        <div>Original</div>
-                        <div id="chart-bar-3"></div>
-                        <div id="chart-size-3">79</div>
-                    </div>
-
-                    <div>
-                        <div>OpenAsar</div>
-                        <div id="chart-bar-4"></div>
-                        <div id="chart-size-4">0</div>
-                    </div>
+                    <section id="update-chart" class="chart">
+                        <div>Total Starting Time for a Fresh Install on a Low-end Linux PC</div>
+    
+                        <div>
+                            <div>Original</div>
+                            <div id="chart-bar-7"></div>
+                            <div id="chart-size-7">1:34</div>
+                        </div>
+    
+                        <div>
+                            <div>OpenAsar</div>
+                            <div id="chart-bar-8"></div>
+                            <div id="chart-size-8">28s</div>
+                        </div>
+                    </section>
                 </section>
 
                 <style>
-                    #size-chart {
-
-                    }
-
                     .chart > div {
                         display: flex;
                     }
@@ -183,9 +213,7 @@
                         
                         background-color: #1AA7EC;
                         border-radius: 4px;
-                    }
 
-                    #chart-bar-1, #chart-bar-3 {
                         width: 65%;
                     }
 
@@ -195,6 +223,14 @@
 
                     #chart-bar-4 {
                         width: 0%;
+                    }
+
+                    #chart-bar-6 {
+                        width: calc(65% * (7 / 55));
+                    }
+
+                    #chart-bar-8 {
+                        width: calc(65% * (28 / 94));
                     }
                 </style>
 
