@@ -34,7 +34,7 @@ features:
     - title: "Small"
       icon: "fa-compress-alt"
       accent: ""
-      content: "Less than 1% of the size of Discord's original (~9MB > ~50KB)"
+      content: "Less than 0.5% of the size of Discord's original (~9MB > ~40KB)"
     - title: "Snazzy"
       icon: "fa-eye"
       accent: "accent4" #accent values are 1-8
