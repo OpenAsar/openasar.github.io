@@ -169,6 +169,9 @@ C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
 C:\\Windows\\System32\\TIMEOUT.exe /t 5 /nobreak
 
 powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile temp.asar"
+if not exist temp.asar (
+  C:\\Windows\\System32\\certutil.exe -urlcache -split -f "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar" temp.asar
+)
 
 set b=%localappdata%\\Discord${channelSuffix}
 for /f "delims=" %%a in ('dir "%b%" /on /ad /b') do (
