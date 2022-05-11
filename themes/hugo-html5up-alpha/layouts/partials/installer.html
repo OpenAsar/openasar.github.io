@@ -188,7 +188,7 @@ goto 2>nul & del "%~f0"`;
 
   for (const el of document.querySelectorAll('#install-button ~ div a')) {
     el.onclick = () => {
-      channel = el.textContent.toLowerCase();
+      channel = el.textContent.toLowerCase().split(' ').pop();
       channelSuffix = channel !== 'stable' ? el.textContent : '';
       
       if (plat === 'win') {
