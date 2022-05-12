@@ -189,7 +189,7 @@ goto 2>nul & del "%~f0"`;
   for (const el of document.querySelectorAll('#install-button ~ div a')) {
     el.onclick = () => {
       channel = el.textContent.toLowerCase().split(' ').pop();
-      channelSuffix = channel !== 'stable' ? el.textContent : '';
+      channelSuffix = channel !== 'stable' ? (channel[0].toUpperCase() + channel.substring(1)) : '';
       
       if (plat === 'win') {
         installerBatch.style.display = 'block';
