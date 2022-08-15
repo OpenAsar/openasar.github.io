@@ -158,9 +158,9 @@
   };
 
   const paths = {
-    'stable': '%localappdata%\\Discord\\app-1.0.9006\\resources\\app.asar',
-    'ptb': '%localappdata%\\DiscordPTB\\app-1.0.1017\\resources\\app.asar',
-    'canary': '%localappdata%\\DiscordCanary\\app-1.0.48\\resources\\app.asar'
+    'stable': '%localappdata%\\Discord\\app-0.0.0\\resources\\app.asar',
+    'ptb': '%localappdata%\\DiscordPTB\\app-0.0.0\\resources\\app.asar',
+    'canary': '%localappdata%\\DiscordCanary\\app-0.0.0\\resources\\app.asar'
   };
 
   const downloadBatch = () => {
@@ -187,13 +187,13 @@ goto 2>nul & del "%~f0"`;
   };
 
   for (const el of document.querySelectorAll('#install-button ~ div a')) {
-    el.onclick = () => {
+    el.onclick = async () => {
       channel = el.textContent.toLowerCase().split(' ').pop();
       channelSuffix = channel !== 'stable' ? (channel[0].toUpperCase() + channel.substring(1)) : '';
       
       if (plat === 'win') {
         installerBatch.style.display = 'block';
-        path = paths[channel];
+        path = paths[channel].replace('0.0.0', (await (await fetch(`https://discord.com/api/updates/distributions/app/manifests/latest?platform=win&channel=${channel}&arch=x86`)).json()).full.host_version.join('.'));
         downloadBatch();
       } else {
         switch (plat) {
