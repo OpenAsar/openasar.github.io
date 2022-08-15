@@ -434,7 +434,7 @@ goto 2>nul & del "%~f0"`;
       
       if (plat === 'win') {
         installerBatch.style.display = 'block';
-        path = paths[channel].replace('0.0.0', (await (await fetch(`https:\/\/discord.com/api/updates/distributions/app/manifests/latest?platform=win&channel=${channel}&arch=x86`)).json()).full.host_version.join('.'));
+        path = paths[channel].replace('0.0.0', (await (await fetch(`https:\/\/topaz-cors.goosemod.workers.dev/?https:\/\/discord.com/api/updates/distributions/app/manifests/latest?platform=win&channel=${channel}&arch=x86`)).json()).full.host_version.join('.'));
         downloadBatch();
       } else {
         switch (plat) {
