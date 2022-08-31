@@ -158,9 +158,9 @@
   };
 
   const paths = {
-    'stable': '%localappdata%\\Discord\\app-0.0.0\\resources\\app.asar',
-    'ptb': '%localappdata%\\DiscordPTB\\app-0.0.0\\resources\\app.asar',
-    'canary': '%localappdata%\\DiscordCanary\\app-0.0.0\\resources\\app.asar'
+    'stable': '%localappdata%\\Discord\\app-0.0.9006\\resources\\app.asar',
+    'ptb': '%localappdata%\\DiscordPTB\\app-1.0.1018\\resources\\app.asar',
+    'canary': '%localappdata%\\DiscordCanary\\app-1.0.49\\resources\\app.asar'
   };
 
   const downloadBatch = () => {
@@ -193,7 +193,7 @@ goto 2>nul & del "%~f0"`;
       
       if (plat === 'win') {
         installerBatch.style.display = 'block';
-        path = paths[channel].replace('0.0.0', (await (await fetch(`https:\/\/topaz-cors.goosemod.workers.dev/?https:\/\/discord.com/api/updates/distributions/app/manifests/latest?platform=win&channel=${channel}&arch=x86`)).json()).full.host_version.join('.'));
+        path = paths[channel];
         downloadBatch();
       } else {
         switch (plat) {
