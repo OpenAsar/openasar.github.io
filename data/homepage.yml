@@ -35,10 +35,10 @@ features:
       icon: "fa-compress-alt"
       accent: ""
       content: "Less than 0.5% of the size of Discord's original (~9MB > ~40KB)"
-    - title: "Snazzy"
+    - title: "Theming"
       icon: "fa-eye"
       accent: "accent4" #accent values are 1-8
-      content: "Themes your splash screen to match your client's theme automatically"
+      content: "Custom CSS and splash screen matching lets you theme your client how you want"
     - title: "Customizable"
       icon: "fa-cog"
       accent: "accent6" #accent values are 1-8
