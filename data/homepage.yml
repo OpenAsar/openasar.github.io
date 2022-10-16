@@ -43,10 +43,10 @@ features:
       icon: "fa-cog"
       accent: "accent6" #accent values are 1-8
       content: "Many config options to choose from, with small tweaks to experimental options"
-    - title: "Drop-in"
+    - title: "Compatible"
       icon: "fa-plug"
       accent: "accent5"
-      content: "You can easily swap out OpenAsar with the original by just replacing the file"
+      content: "Works with other mods at the same time, all OSs, and Discord versions"
 
 stats:
   rows:
@@ -82,14 +82,14 @@ installer:
     - "PTB"
     - "Canary"
     - "Development"
-  
+
   mods:
     major:
       - "BetterDiscord"
 #      - "SmartCord"
-    
+
     minor:
       - "GooseMod"
-  
+
   tools:
     - "React DevTools"
