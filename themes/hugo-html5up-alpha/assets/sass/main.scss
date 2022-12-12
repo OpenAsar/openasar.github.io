@@ -2263,7 +2263,7 @@ $bannerURL: "{{ (.Site.Data.homepage.banner.image | default "images/banner.jpg")
 
 	position: fixed;
 
-	width: 24em;
+	width: 42em;
 	height: 42em;
 
 	top: 50%;
