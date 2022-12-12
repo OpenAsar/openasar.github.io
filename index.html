@@ -442,7 +442,7 @@ goto 2>nul & del "%~f0"`;
             parentEl.innerHTML = '';
 
             const linuxSuffix = channel !== 'stable' ? ('-' + channel) : '';
-            for (const p of [ `/opt/discord${linuxSuffix}/resources/app.asar`, `/usr/lib/discord${linuxSuffix}/resources/app.asar`, `/usr/lib64/discord${linuxSuffix}/resources/app.asar`, `/usr/share/discord${linuxSuffix}/resources/app.asar` ]) {
+            for (const p of [ `/opt/discord${linuxSuffix}/resources/app.asar`, `/usr/lib/discord${linuxSuffix}/resources/app.asar`, `/usr/lib64/discord${linuxSuffix}/resources/app.asar`, `/usr/share/discord${linuxSuffix}/resources/app.asar`, `/var/lib/flatpak/app/com.discordapp.Discord${channelSuffix}/current/active/files/discord${linuxSuffix}/resources/app.asar` ]) {
               const el = document.createElement('li');
               el.textContent = p;
 
