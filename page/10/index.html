@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-	<meta name="generator" content="Hugo 0.109.0">
+	<meta name="generator" content="Hugo 0.110.0">
 
 
 
@@ -405,6 +405,7 @@
 
   const downloadBatch = () => {
     batch = `@echo off
+echo Closing Discord...
 
 C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
 C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
@@ -412,6 +413,7 @@ C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
 
 C:\\Windows\\System32\\TIMEOUT.exe /t 5 /nobreak
 
+echo Installing OpenAsar...
 copy /y "${path}" "${path}.backup"
 
 ${window.navigator.userAgent.includes("Windows NT 6.1") ?
@@ -419,9 +421,10 @@ ${window.navigator.userAgent.includes("Windows NT 6.1") ?
   `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\""`
 }
 
-start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Discord${channelSuffix}.exe
+${channelSuffix === '' ? `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA').replace('08', '10')}\\""` : ''}
 
-goto 2>nul & del "%~f0"`;
+echo Opening Discord...
+start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Discord${channelSuffix}.exe`;
 
     downloadToFile(batch, `openasar_installer_${channel}.bat`, 'application/bat');
   };
