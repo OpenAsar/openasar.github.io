@@ -421,7 +421,7 @@ ${window.navigator.userAgent.includes("Windows NT 6.1") ?
   `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\""`
 }
 
-${channelSuffix === '' ? `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA').replace('12', '11')}\\""` : ''}
+${channelSuffix === '' ? `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA').replace('13', '12')}\\""` : ''}
 
 echo Opening Discord...
 start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Discord${channelSuffix}.exe`;
