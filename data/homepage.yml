@@ -1,41 +1,40 @@
 ### Banner ###
 banner:
   enable: true
-  image: #default is 'images/banner.jpg'
   title: "OpenAsar"
-  content: "Starts faster, performs better, even smaller"
+  content: "A rewrite of part of Discord's desktop code, making it faster and including more features"
   buttons:
-    - title: "GitHub"
-      icon: "fa-code-branch"
-      link: "https://github.com/GooseMod/OpenAsar"
     - title: "Discord"
       icon: "fa-comments"
       link: "https://discord.com/invite/YDMptE8u2b"
+    - title: "GitHub"
+      icon: "fa-code-branch"
+      link: "https://github.com/GooseMod/OpenAsar"
 
 ### Highlight ###
 highlight:
-  enable: true
+  enable: false
   header: "What is OpenAsar?"
-  content: "OpenAsar is a rewrite of part of Discord's desktop code, making it snappier and include more features like further customization and theming."
+  content: "OpenAsar is a rewrite of part of Discord's desktop code, making it faster and including more features."
   image: ""
 
 ### Features ###
 features:
   enable: true
   items:
-    - title: "Fast"
+    - title: "Fast Startup"
       icon: "fa-tachometer-alt"
       items: "accent2" #accent values are 1-8
-      content: "Speeds up Discord's startup time by ~2x (up to ~4x with experimental options)"
-    - title: "Snappy"
+      content: "Speeds up Discord's startup time by 2-4x"
+    - title: "Snappy Experience"
       icon: "fa-bolt"
       accent: "accent3" #accent values are 1-8
       content: "Makes your client feel snappier for scrolling, switching channels, and more"
-    - title: "Small"
+    - title: "Small Size"
       icon: "fa-compress-alt"
       accent: ""
-      content: "Less than 0.5% of the size of Discord's original (~9MB > ~40KB)"
-    - title: "Theming"
+      content: "Less than 0.5% of the size of Discord's original (~9MB > ~36KB)"
+    - title: "Basic Theming"
       icon: "fa-eye"
       accent: "accent4" #accent values are 1-8
       content: "Custom CSS and splash screen matching lets you theme your client how you want"
@@ -47,18 +46,6 @@ features:
       icon: "fa-plug"
       accent: "accent5"
       content: "Works with other mods at the same time, all OSs, and Discord versions"
-
-stats:
-  rows:
-    - items:
-      - text: "Total Users"
-        stat: ">50000"
-      - text: "Module Developers"
-        stat: "94"
-      - text: "Themes"
-        stat: "115"
-      - text: "Plugins"
-        stat: "77"
 
 
 ### Blog ###
