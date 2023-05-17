@@ -29,7 +29,7 @@
             
             
                 <h2>OpenAsar</h2>
-                <p>Starts faster, performs better, even smaller</p>
+                <p>A rewrite of part of Discord&#39;s desktop code, making it faster and including more features</p>
                 <ul class="actions special">
                     <li id="install-parent"><a id="install-button" href="#" class="button primary" alt="Install" style="position: relative; padding-right: 3.5em;"><i class="icon solid fa-cloud-download-alt" style="margin-right: 5px;"></i> Install <i class="icon solid fa-chevron-down" style="position: absolute; right: 12px;"></i></a>
                         <div class="">
@@ -40,9 +40,9 @@
                     </li>
                     
                 
-                    <li><a href="https://github.com/GooseMod/OpenAsar" class="button " alt="GitHub"><i class="icon solid fa-code-branch" style="margin-right: 5px;"></i> GitHub</a></li>
-                
                     <li><a href="https://discord.com/invite/YDMptE8u2b" class="button " alt="Discord"><i class="icon solid fa-comments" style="margin-right: 5px;"></i> Discord</a></li>
+                
+                    <li><a href="https://github.com/GooseMod/OpenAsar" class="button " alt="GitHub"><i class="icon solid fa-code-branch" style="margin-right: 5px;"></i> GitHub</a></li>
                 
                 </ul>
             
@@ -55,17 +55,6 @@
             <section id="main" class="container">
                 
                 
-                
-                    <section class="box special">
-                        <header class="major">
-                            
-                            <h2>What is OpenAsar?</h2>
-                            <p>OpenAsar is a rewrite of part of Discord's desktop code, making it snappier and include more features like further customization and theming.</p>
-                        </header>
-                        
-                    </section>
-                
-                
 
                 
                 
@@ -74,25 +63,25 @@
                         
                             <section class="box special">
                                 <span class="icon solid major fa-tachometer-alt "></span>
-                                <h3>Fast</h3>
-                                <p>Speeds up Discord&#39;s startup time by ~2x (up to ~4x with experimental options)</p>
+                                <h3>Fast Startup</h3>
+                                <p>Speeds up Discord&#39;s startup time by 2-4x</p>
                             </section>
                         
                             <section class="box special">
                                 <span class="icon solid major fa-bolt accent3"></span>
-                                <h3>Snappy</h3>
+                                <h3>Snappy Experience</h3>
                                 <p>Makes your client feel snappier for scrolling, switching channels, and more</p>
                             </section>
                         
                             <section class="box special">
                                 <span class="icon solid major fa-compress-alt "></span>
-                                <h3>Small</h3>
-                                <p>Less than 0.5% of the size of Discord&#39;s original (~9MB &gt; ~40KB)</p>
+                                <h3>Small Size</h3>
+                                <p>Less than 0.5% of the size of Discord&#39;s original (~9MB &gt; ~36KB)</p>
                             </section>
                         
                             <section class="box special">
                                 <span class="icon solid major fa-eye accent4"></span>
-                                <h3>Theming</h3>
+                                <h3>Basic Theming</h3>
                                 <p>Custom CSS and splash screen matching lets you theme your client how you want</p>
                             </section>
                         
@@ -327,59 +316,59 @@
   const installerBatch = document.getElementById('installer-batch');
   const installerFile = document.getElementById('installer-file');
   const installerRestart = document.getElementById('installer-restart');
-  
+
   const installerPath = document.getElementById('path-for');
 
   const fileSelectEl = document.getElementById('fileSelect');
 
-  
+
   installerFile.querySelector('.final a').onclick = () => {
     downloadFileUrl('https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar', 'app.asar');
 
     installerFile.style.display = 'none';
     installerRestart.style.display = 'block';
   };
-  
+
   const getFileUpload = async () => {
     fileSelectEl.value = null; 
     fileSelectEl.click();
-    
+
     await new Promise((res) => {
       fileSelectEl.onchange = () => {
         res();
       };
     });
-    
+
     fileSelectEl.onchange = undefined;
-    
+
     const file = fileSelectEl.files[0];
-    
+
     if (file === undefined) {
       return undefined;
     }
-    
+
     return file;
   };
-  
+
   const downloadToFile = (content, filename, contentType) => { 
     const a = document.createElement('a');
     const file = new Blob([content], {type: contentType});
-    
+
     a.href = URL.createObjectURL(file);
     a.download = filename;
     a.click();
-    
+
     URL.revokeObjectURL(a.href);
   };
 
   const downloadFileUrl = (url, filename) => {
     const a = document.createElement('a');
-    
+
     a.href = url;
     a.download = filename;
     a.click();
   };
-  
+
   
 
 
@@ -398,33 +387,51 @@
   };
 
   const paths = {
-    'stable': '%localappdata%\\Discord\\app-1.0.9013\\resources\\app.asar',
-    'ptb': '%localappdata%\\DiscordPTB\\app-1.0.1027\\resources\\app.asar',
-    'canary': '%localappdata%\\DiscordCanary\\app-1.0.60\\resources\\app.asar'
+    'stable': '%localappdata%\\Discord\\app-1.0.9013\\resources',
+    'ptb': '%localappdata%\\DiscordPTB\\app-1.0.1027\\resources',
+    'canary': '%localappdata%\\DiscordCanary\\app-1.0.61\\resources'
   };
 
   const downloadBatch = () => {
     batch = `@echo off
-echo Closing Discord...
+echo Closing Discord... (wait around 5 seconds)
 
-C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
-C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
-C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe
+C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe > nul 2> nul
+C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe > nul 2> nul
+C:\\Windows\\System32\\TASKKILL.exe /f /im Discord${channelSuffix}.exe > nul 2> nul
 
-C:\\Windows\\System32\\TIMEOUT.exe /t 5 /nobreak
+C:\\Windows\\System32\\TIMEOUT.exe /t 5 /nobreak > nul 2> nul
 
-echo Installing OpenAsar...
-copy /y "${path}" "${path}.backup"
+echo Installing OpenAsar... (ignore any blue output flashes)
+copy /y "${path}\\app.asar" "${path}\\app.asar.backup" > nul 2> nul
+if exist "${path}\\_app.asar" copy /y "${path}\\_app.asar" "${path}\\app.asar.backup" > nul 2> nul
+if exist "${path}\\app.asar.orig" copy /y "${path}\\app.asar.orig" "${path}\\app.asar.backup" > nul 2> nul
 
 ${window.navigator.userAgent.includes("Windows NT 6.1") ?
-  `C:\\Windows\\System32\\certutil.exe -urlcache -split -f "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar" "${path}"` :
-  `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\""`
+  `C:\\Windows\\System32\\certutil.exe -urlcache -split -f "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar" "${path}\\app.asar" > nul 2> nul` :
+  `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul`
 }
 
-${channelSuffix === '' ? `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA').replace('13', '12')}\\""` : ''}
+${channelSuffix === '' ? `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA').replace('13', '12')}\\app.asar\\"" > nul 2> nul` : ''}
+
+if exist "${path}\\_app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path}\\_app.asar\\"" > nul 2> nul
+if exist "${path}\\app.asar.orig" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path}\\app.asar.orig\\"" > nul 2> nul
 
 echo Opening Discord...
-start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Discord${channelSuffix}.exe`;
+start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Discord${channelSuffix}.exe > nul 2> nul
+
+C:\\Windows\\System32\\TIMEOUT.exe /t 1 /nobreak > nul 2> nul
+
+echo.
+echo.
+echo OpenAsar should be installed! You can check by looking for an "OpenAsar" option in your Discord settings.
+echo Not installed? Try restarting Discord, running the script again, or if still not join our Discord server.
+echo.
+echo openasar.dev
+
+echo.
+pause
+`;
 
     downloadToFile(batch, `openasar_installer_${channel}.bat`, 'application/bat');
   };
@@ -433,7 +440,7 @@ start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Di
     el.onclick = async () => {
       channel = el.textContent.toLowerCase().split(' ').pop();
       channelSuffix = channel !== 'stable' ? (channel[0].toUpperCase() + channel.substring(1)) : '';
-      
+
       if (plat === 'win') {
         installerBatch.style.display = 'block';
         path = paths[channel];
