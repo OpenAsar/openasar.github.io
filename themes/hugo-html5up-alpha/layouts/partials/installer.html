@@ -164,6 +164,13 @@
   };
 
   const downloadBatch = () => {
+    const degradePath = (path, amount = 1) => {
+      let segments = path.split('\\');
+      segments[segments.length - 2] = segments[segments.length - 2].split('.').map((x, i) => i === 2 ? (parseInt(x) - amount) : x).join('.');
+      return segments.join('\\');
+    };
+    const oldPath = degradePath(path);
+
     batch = `@echo off
 echo Closing Discord... (wait around 5 seconds)
 
@@ -183,10 +190,10 @@ ${window.navigator.userAgent.includes("Windows NT 6.1") ?
   `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul`
 }
 
-${channelSuffix === '' ? `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA').replace('13', '12')}\\app.asar\\"" > nul 2> nul` : ''}
+if exist "${oldPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${oldPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
 
-if exist "${path}\\_app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path}\\_app.asar\\"" > nul 2> nul
-if exist "${path}\\app.asar.orig" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path}\\app.asar.orig\\"" > nul 2> nul
+if exist "${path}\\_app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\_app.asar\\"" > nul 2> nul
+if exist "${path}\\app.asar.orig" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar.orig\\"" > nul 2> nul
 
 echo Opening Discord...
 start "" "%localappdata%\\Discord${channelSuffix}\\Update.exe" --processStart Discord${channelSuffix}.exe > nul 2> nul
