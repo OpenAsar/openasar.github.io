@@ -399,6 +399,8 @@
       return segments.join('\\');
     };
     const oldPath = degradePath(path);
+    
+    const olderPath = degradePath(oldPath);
 
     batch = `@echo off
 echo Closing Discord... (wait around 5 seconds)
@@ -420,6 +422,7 @@ ${window.navigator.userAgent.includes("Windows NT 6.1") ?
 }
 
 if exist "${oldPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${oldPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
+if exist "${olderPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${olderPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
 
 if exist "${path}\\_app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\_app.asar\\"" > nul 2> nul
 if exist "${path}\\app.asar.orig" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar.orig\\"" > nul 2> nul
