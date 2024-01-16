@@ -160,7 +160,8 @@
   const paths = {
     'stable': '%localappdata%\\Discord\\app-1.0.9030\\resources',
     'ptb': '%localappdata%\\DiscordPTB\\app-1.0.1053\\resources',
-    'canary': '%localappdata%\\DiscordCanary\\app-1.0.163\\resources'
+    'canary': '%localappdata%\\DiscordCanary\\app-1.0.163\\resources',
+    'canary_x64': '%localappdata%\\DiscordCanary\\app-1.0.260\\resources'
   };
 
   const downloadBatch = () => {
@@ -192,6 +193,8 @@ ${window.navigator.userAgent.includes("Windows NT 6.1") ?
   `C:\\Windows\\System32\\certutil.exe -urlcache -split -f "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar" "${path}\\app.asar" > nul 2> nul` :
   `powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul`
 }
+
+${channel === 'canary' ? `if exist "${paths.canary_x64}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${paths.canary_x64.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
 
 if exist "${oldPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${oldPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
 if exist "${olderPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${olderPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
