@@ -391,6 +391,7 @@
 
   const paths = {
     'stable': '%localappdata%\\Discord\\app-1.0.9044\\resources',
+    'stable_x64': '%localappdata%\\Discord\\app-1.0.9144\\resources', 
     'ptb': '%localappdata%\\DiscordPTB\\app-1.0.1069\\resources',
     'canary': '%localappdata%\\DiscordCanary\\app-1.0.237\\resources',
     'canary_x64': '%localappdata%\\DiscordCanary\\app-1.0.335\\resources'
@@ -427,6 +428,9 @@ ${window.navigator.userAgent.includes("Windows NT 6.1") ?
 }
 
 ${channel === 'canary' ? `if exist "${paths.canary_x64}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${paths.canary_x64.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
+
+${channel === 'stable' ? `if exist "${paths.stable_x64}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${paths.stable_x64.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
+${channel === 'stable' ? `if exist "${degradePath(paths.stable_x64)}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${degradePath(paths.stable_x64).replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
 
 if exist "${oldPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${oldPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
 if exist "${olderPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${olderPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
