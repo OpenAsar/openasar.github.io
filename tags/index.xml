@@ -4,8 +4,7 @@
     <title>Tags on OpenAsar</title>
     <link>/tags/</link>
     <description>Recent content in Tags on OpenAsar</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
