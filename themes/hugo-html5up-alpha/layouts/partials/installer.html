@@ -158,11 +158,10 @@
   };
 
   const paths = {
-    'stable': '%localappdata%\\Discord\\app-1.0.9059\\resources',
-    'stable_x64': '%localappdata%\\Discord\\app-1.0.9177\\resources',
-    'stable_x64_2': '%localappdata%\\Discord\\app-1.0.9098\\resources',
+    'stable': '%localappdata%\\Discord\\app-1.0.9178\\resources',
+    'stable_old': '%localappdata%\\Discord\\app-1.0.9059\\resources',
     'ptb': '%localappdata%\\DiscordPTB\\app-1.0.1091\\resources',
-    'canary': '%localappdata%\\DiscordCanary\\app-1.0.329\\resources',
+    'canary': '%localappdata%\\DiscordCanary\\app-1.0.534\\resources',
     'canary_x64': '%localappdata%\\DiscordCanary\\app-1.0.523\\resources'
   };
 
@@ -176,6 +175,10 @@
     // discord's updater is really good so sometimes even fresh installs are 2 versions out of date.
     const olderPath = degradePath(oldPath);
     const oldestPath = degradePath(olderPath);
+    
+    const newPath = degradePath(path, -1);
+    const newerPath = degradePath(newPath, -1);
+    const newestPath = degradePath(newerPath, -1);
 
     batch = `@echo off
 echo Closing Discord... (wait around 5 seconds)
@@ -198,17 +201,17 @@ ${window.navigator.userAgent.includes("Windows NT 6.1") ?
 
 ${channel === 'canary' ? `if exist "${paths.canary_x64}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${paths.canary_x64.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
 
-${channel === 'stable' ? `if exist "${paths.stable_x64}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${paths.stable_x64.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
-${channel === 'stable' ? `if exist "${degradePath(paths.stable_x64)}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${degradePath(paths.stable_x64).replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
-${channel === 'stable' ? `if exist "${degradePath(degradePath(paths.stable_x64))}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${degradePath(degradePath(paths.stable_x64)).replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
-
-${channel === 'stable' ? `if exist "${paths.stable_x64_2}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${paths.stable_x64_2.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
-${channel === 'stable' ? `if exist "${degradePath(paths.stable_x64_2)}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${degradePath(paths.stable_x64_2).replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
-${channel === 'stable' ? `if exist "${degradePath(degradePath(paths.stable_x64_2))}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${degradePath(degradePath(paths.stable_x64_2)).replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
+${channel === 'stable' ? `if exist "${paths.stable_old}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${paths.stable_old.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
+${channel === 'stable' ? `if exist "${degradePath(paths.stable_old)}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${degradePath(paths.stable_old).replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
+${channel === 'stable' ? `if exist "${degradePath(degradePath(paths.stable_old))}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${degradePath(degradePath(paths.stable_old)).replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul` : ''}
 
 if exist "${oldPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${oldPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
 if exist "${olderPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${olderPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
 if exist "${oldestPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${oldestPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
+
+if exist "${newPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${newPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
+if exist "${newerPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${newerPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
+if exist "${newestPath}\\app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${newestPath.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar\\"" > nul 2> nul
 
 if exist "${path}\\_app.asar" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\_app.asar\\"" > nul 2> nul
 if exist "${path}\\app.asar.orig" powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \\"${path.replace('%localappdata%', '$Env:LOCALAPPDATA')}\\app.asar.orig\\"" > nul 2> nul
